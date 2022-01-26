@@ -14,7 +14,13 @@ export class NewsService {
     async getJson(){
         const news = await this.httpService.get('https://hn.algolia.com/api/v1/search_by_date?query=nodejs', {}).subscribe(
             res => {
-                console.log(res.data);
+                //console.log(res.data);
+                const json = res.data.hits;
+                console.log("---------------------------------------");
+                //console.log(json);
+                for(var i = 0; i < 5; i++){
+                    console.log(json[i])
+                }
             }
         )
         //const news = await this.newsModel.find().populate('news');
