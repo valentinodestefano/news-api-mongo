@@ -7,7 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 
 @Module({
-  imports: [NewsModule, MongooseModule.forRoot('mongodb+srv://valendesdel:Valentina_25@cluster0.hqhas.mongodb.net/test-reign?retryWrites=true&w=majority', 
+  imports: [NewsModule, MongooseModule.forRoot('mongodb+srv://valendesdel:Valentina_25@cluster0.8uvul.mongodb.net/test-reign?retryWrites=true&w=majority', 
   {useNewUrlParser: true})],
   controllers: [AppController],
   providers: [AppService],

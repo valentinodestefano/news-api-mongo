@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { HttpService } from '@nestjs/axios';
 
 import { NewsInterface } from './interface/news.interface';
+import { NewsDTO } from './dto/news.dto';
 
 @Injectable()
 export class NewsService {
@@ -20,10 +21,21 @@ export class NewsService {
                 //console.log(json);
                 for(var i = 0; i < 5; i++){
                     console.log(json[i])
+                    this.PushNews(json[i]);
                 }
             }
         )
         //const news = await this.newsModel.find().populate('news');
         return news;
+    }
+
+    async PushNews(newsDTO: NewsDTO): Promise<NewsInterface>{
+        const news = new this.newsModel(newsDTO);
+        return await news.save();
+    }
+
+    async deleteNews(_id: string): Promise<NewsInterface>{
+        const newsDeleted = await this.newsModel.findByIdAndDelete(_id);
+        return newsDeleted;
     }
 }

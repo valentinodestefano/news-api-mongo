@@ -12,12 +12,21 @@ export class NewsController {
     constructor(private newsService: NewsService){}
 
     @ApiTags('News')
-    @Get('/createAutor')
+    @Post('/uploadNews')
     async createPost(@Res() res){
         const news = await this.newsService.getJson();
         return res.status(HttpStatus.OK).json({
             message: 'created',
             news: news
         });
+    }
+
+    @ApiTags('News')
+    @Delete('/deleNews/:_id')
+    async deleteNews(@Res() res, @Param('_id') _id: string){
+        const news = await this.newsService.deleteNews(_id);
+        return res.status(HttpStatus.OK).json({
+            message: 'succesful'
+        })
     }
 }
