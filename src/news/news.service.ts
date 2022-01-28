@@ -5,28 +5,24 @@ import { HttpService } from '@nestjs/axios';
 
 import { NewsInterface } from './interface/news.interface';
 import { NewsDTO } from './dto/news.dto';
-
-
+import { Cron, CronExpression } from '@nestjs/schedule';
 @Injectable()
 export class NewsService {
 
     constructor(@InjectModel('News') private readonly newsModel: Model<NewsInterface>,
     private httpService: HttpService){}
 
+    @Cron(CronExpression.EVERY_HOUR)
     async getJson(){
         const news = await this.httpService.get('https://hn.algolia.com/api/v1/search_by_date?query=nodejs', {}).subscribe(
             res => {
-                //console.log(res.data);
                 const json = res.data.hits;
-                console.log("---------------------------------------");
-                //console.log(json);
-                for(var i = 0; i < 5; i++){
+                for(var i = 0; i < json.length; i++){
                     console.log(json[i])
                     this.PushNews(json[i]);
                 }
             }
         )
-        //const news = await this.newsModel.find().populate('news');
         return news;
     }
 
@@ -40,8 +36,13 @@ export class NewsService {
         return newsDeleted;
     }
 
+    async deleteAllNews(){
+        await this.newsModel.deleteMany();
+    }
+
+
     async getNews(): Promise<NewsInterface[]>{
-        const news = await this.newsModel.find();
+        const news = await this.newsModel.find().limit(5);
         return news;
     }
 
@@ -50,5 +51,8 @@ export class NewsService {
         return news;
     }
 
-
+    async getNewsByTitle(title: string): Promise<NewsInterface[]>{
+        const news = await this.newsModel.find({ title });
+        return news;
+    }
 }

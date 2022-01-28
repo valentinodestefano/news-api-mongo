@@ -7,6 +7,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { NewsDTO } from './dto/news.dto';
 
 
+
 @Controller('news')
 export class NewsController {
 
@@ -17,15 +18,23 @@ export class NewsController {
     async createPost(@Res() res){
         const news = await this.newsService.getJson();
         return res.status(HttpStatus.OK).json({
-            message: 'created',
-            news: news
+            message: 'News items have been obtained and successfully uploaded to the database.',
         });
     }
 
     @ApiTags('News')
-    @Delete('/deleNews/:_id')
+    @Delete('/deleteNews/:_id')
     async deleteNews(@Res() res, @Param('_id') _id: string){
         const news = await this.newsService.deleteNews(_id);
+        return res.status(HttpStatus.OK).json({
+            message: 'succesful'
+        })
+    }
+
+    @ApiTags('News')
+    @Delete('/deleteAllNews')
+    async deleteAllNews(@Res() res){
+        const news = await this.newsService.deleteAllNews();
         return res.status(HttpStatus.OK).json({
             message: 'succesful'
         })
@@ -42,6 +51,16 @@ export class NewsController {
     }
 
     @ApiTags('News')
+    @Get('/:title')
+    async getTitle(@Res() res, @Param('title') title: string){
+        const news = await this.newsService.getNewsByTitle(title);
+        return res.status(HttpStatus.OK).json({
+            message: 'Succesful',
+            news: news
+        })
+    }
+
+    @ApiTags('News')
     @Get('/:author')
     async getNewsByAuthor(@Res() res, @Param('author') author: string){
         const news = await this.newsService.getNewsByAuthor(author);
@@ -49,7 +68,7 @@ export class NewsController {
            return res.status(HttpStatus.BAD_REQUEST);
         }
         return res.status(HttpStatus.OK).json({
-            message: 'succesfull',
+            message: 'succesful',
             news: news
         })
     }

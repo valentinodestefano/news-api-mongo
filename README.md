@@ -1,30 +1,19 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+## TEST REIGN VALENTINO DESTEFANO
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Hi, first I would like to thank you for giving me the opportunity to do this test, it has been a lot of fun to develop this API for you.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Now to configure the database (MongoDB) you need to go to: https://www.mongodb.com/es/cloud/atlas/register 
+Here you can register and you will be given a free Cluster, where you can create a database and then with this link you can connect putting it in the app.module.ts
+mongodb+srv://USERNAME:PASSWORD@cluster0.8uvul.mongodb.net/DATABASENAME?retryWrites=true&w=majority
 
-## Description
+(Please change USERNAME, PASSWORD, DATABASENAME for your credentials, also in the "connect" section you have this information) 
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+After this you will be able to use the API and you will be able to see how it modifies the database. To populate it you will only have to use the /news/uploadNews endpoint.
+On the other hand, talking about the API, through a CronJob the app will take every hour, through an Httpclient request, all the news provided by Hacker News URL and will upload them to the database.  Also, as the test says there are endpoints to delete by id, I also added an endpoint to empty all the news from the database if desired, you also get the first 5 news as requested in the test and you can search by title (field: title) and by author (field: author). However, the whole JWT authentication system was added as requested in the test (register, login, authenticated user and logout) the token has a duration of 1 day.
+
+I hope you like it, as I really enjoyed programming everything. 
+
+I look forward to your comments. 
 
 ## Installation
 
@@ -45,29 +34,4 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).

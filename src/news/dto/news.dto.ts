@@ -4,25 +4,25 @@ export class NewsDTO {
 
 
 @ApiModelProperty({
-    description: '',
+    description: 'creations date',
     example: '',
 })
 readonly created_at: Date;
 
 @ApiModelProperty({
-    description: '',
+    description: 'news title',
     example: '',
 })
 readonly title: string;
 
 @ApiModelProperty({
-    description: '',
+    description: 'news url',
     example: '',
 })
 readonly url: string;
 
 @ApiModelProperty({
-    description: '',
+    description: 'news author',
     example: '',
 })
 readonly author: string;
