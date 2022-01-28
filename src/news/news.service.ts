@@ -6,6 +6,7 @@ import { HttpService } from '@nestjs/axios';
 import { NewsInterface } from './interface/news.interface';
 import { NewsDTO } from './dto/news.dto';
 
+
 @Injectable()
 export class NewsService {
 
@@ -38,4 +39,16 @@ export class NewsService {
         const newsDeleted = await this.newsModel.findByIdAndDelete(_id);
         return newsDeleted;
     }
+
+    async getNews(): Promise<NewsInterface[]>{
+        const news = await this.newsModel.find();
+        return news;
+    }
+
+    async getNewsByAuthor(author: string): Promise<NewsInterface[]>{
+        const news = await this.newsModel.find({ author });
+        return news;
+    }
+
+
 }

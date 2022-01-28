@@ -1,10 +1,11 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, NotFoundException, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, NotFoundException, Param, Post, Put, Query, Res } from '@nestjs/common';
 
 import { NewsService } from './news.service';
 
 
 import { ApiTags } from '@nestjs/swagger';
 import { NewsDTO } from './dto/news.dto';
+
 
 @Controller('news')
 export class NewsController {
@@ -29,4 +30,29 @@ export class NewsController {
             message: 'succesful'
         })
     }
+
+    @ApiTags('News')
+    @Get('/getNews')
+    async getNews(@Res() res){
+        const news = await this.newsService.getNews();
+        return res.status(HttpStatus.OK).json({
+            message: 'Succesful',
+            news: news
+        })
+    }
+
+    @ApiTags('News')
+    @Get('/:author')
+    async getNewsByAuthor(@Res() res, @Param('author') author: string){
+        const news = await this.newsService.getNewsByAuthor(author);
+        if (!news) {
+           return res.status(HttpStatus.BAD_REQUEST);
+        }
+        return res.status(HttpStatus.OK).json({
+            message: 'succesfull',
+            news: news
+        })
+    }
+
+
 }
