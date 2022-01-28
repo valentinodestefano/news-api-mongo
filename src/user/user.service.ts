@@ -5,10 +5,12 @@ import { Model } from 'mongoose';
 import { UserDTO } from './dto/user.dto';
 import { User } from './schema/user.schema';
 
+
 @Injectable()
 export class UserService {
 
-    constructor(@InjectModel('User') private readonly userModel: Model<UserInterface>){
+    constructor(
+        @InjectModel('User') private readonly userModel: Model<UserInterface>){
 
     }
 
