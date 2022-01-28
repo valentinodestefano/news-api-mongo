@@ -17,5 +17,10 @@ export class UserService {
         return await newUser.save();
     }
 
+    async loginFindOne(condition: any): Promise<UserInterface>{
+        const user = await this.userModel.findOne(condition);
+        return await user;
+    }
+
 
 }
